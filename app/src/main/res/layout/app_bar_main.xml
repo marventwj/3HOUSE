@@ -1,4 +1,5 @@
 <android.support.design.widget.AppBarLayout android:layout_width="match_parent"
+    android:id="@+id/applayout"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/AppTheme.AppBarOverlay"
@@ -9,7 +10,6 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorOrange">
-
 
 
         <ImageView
@@ -25,7 +25,7 @@
                 android:id="@+id/mySearchView"
                 android:layout_gravity="left"
                 android:queryHint="@string/search_hint"
-                android:layout_width="220dp"
+                android:layout_width="wrap_content"
                 android:iconifiedByDefault="false"
                 android:background="@drawable/round_corner"
                 android:layout_height="40dp" />

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
@@ -17,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
@@ -64,20 +66,6 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.fragment_container,fragment);
         fragmentTransaction.commit();
 
-/*
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.trythis);
-        //when user clicks on that layout, hides the keyboard
-        layout.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View view, MotionEvent ev)
-            {
-                hideKeyboard(view);
-                return false;
-            }
-        });
-*/
-
         searchView=(SearchView) findViewById(R.id.mySearchView);
         //listens to query
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -94,6 +82,7 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -149,7 +138,7 @@ public class MainActivity extends AppCompatActivity
     {
         boolean checked = ((CheckBox)view).isChecked();
         if (view.getId() == R.id.checkBox1) {
-            if (checked == true) {
+            if (checked) {
                 Log.i("already chosen lah", "already chosen lah");
                 return;
             }
@@ -157,7 +146,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         if (view.getId() == R.id.checkBox2) {
-            if (checked == true) {
+            if (checked) {
                 Log.i("already chosen lah", "already chosen lah");
                 return;
             }
@@ -165,30 +154,21 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     /**
      * Hides the soft keyboard
      */
-    public void hideSoftKeyboard() {
-        if(getCurrentFocus()!=null) {
-            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View view = getCurrentFocus();
+        if (view != null && (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_MOVE) && view instanceof EditText && !view.getClass().getName().startsWith("android.webkit.")) {
+            int scrcoords[] = new int[2];
+            view.getLocationOnScreen(scrcoords);
+            float x = ev.getRawX() + view.getLeft() - scrcoords[0];
+            float y = ev.getRawY() + view.getTop() - scrcoords[1];
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom())
+                ((InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((this.getWindow().getDecorView().getApplicationWindowToken()), 0);
         }
-    }
-
-    /**
-     * Shows the soft keyboard
-     */
-    public void showSoftKeyboard(View view) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        view.requestFocus();
-        inputMethodManager.showSoftInput(view, 0);
-    }
-
-    protected void hideKeyboard(View view)
-    {
-        InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        in.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override
@@ -206,19 +186,22 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_watchlist) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_settings) {
 
-        } else if (id == R.id.nav_share) {
-           // drawer.closeDrawer(GravityCompat.START);
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_logout) {
 
         }
+
+
+        //else if (id == R.id.nav_send) {
+
+        //}
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
