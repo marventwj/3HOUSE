@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">3HOUSE</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="searchable">nothing much</string>
+    <string name="search_hint">Browse location</string>
+
+    <string name="checkBox1">Nearby places</string>
+    <string name="checkBox2">Transportation</string>
+    <string name="checkBox3">Prices</string>
+    <string name="checkBox4">Nearby Facilities</string>
+    <string name="checkBox5">Shopping Mall</string>
+    <string name="checkBox6">ATM</string>
+    <string name="checkBox7">Convenience Store</string>
+    <string name="checkBox8">Police Station</string>
+    <string name="checkBox9">Hospital</string>
+    <string name="checkBox10">Sports Centre</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
