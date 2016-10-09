@@ -1,31 +1,13 @@
 package com.example.marven.a3house;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.SearchManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.MenuItemCompat;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.SearchView;
 //import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -33,17 +15,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,21 +31,22 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//
+
         //set the fragment initially
-        FirstFragment fragment = new FirstFragment();
+        SelectCriteriaFragment fragment = new SelectCriteriaFragment();
+        //RateCriteriaFragment fragment = new RateCriteriaFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction =
                 getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragment);
         fragmentTransaction.commit();
 
         searchView=(SearchView) findViewById(R.id.mySearchView);
-        //listens to query
+        //listens to search query
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(getBaseContext(), query, Toast.LENGTH_LONG).show();
-                Log.i("hello",query);
+                Log.i("search input",query);
                 return false;
             }
 
@@ -82,7 +56,6 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
-
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -95,10 +68,15 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
         //navigation tab listeners
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //circular profile image for user in navigation view
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        CircularImageView nav_user = (CircularImageView) hView.findViewById(R.id.imageViewCircular);
+        //nav_user.setImageResource(R.mipmap.ic_launcher);   //replace this with user's profile picture
 
 /*
       //for floating button listener
@@ -111,14 +89,14 @@ public class MainActivity extends AppCompatActivity
 
                 //change of fragments
 
-                SecondFragment fragment = new SecondFragment();
+                RateCriteriaFragment fragment = new RateCriteriaFragment();
                 android.support.v4.app.FragmentTransaction fragmentTransaction =
                         getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container,fragment);
                 fragmentTransaction.commit();
 
                 //FragmentManager fragmentManager = getFragmentManager();
-                //fragmentManager.beginTransaction().replace(R.id.trythis, new FirstFragment()).commit();
+                //fragmentManager.beginTransaction().replace(R.id.trythis, new SelectCriteriaFragment()).commit();
             }
         });*/
 
@@ -133,30 +111,7 @@ public class MainActivity extends AppCompatActivity
         //  searchView.setIconifiedByDefault(false);
     }
 
-    //when checkbox is selected / deselected listener
-    public void selectButton(View view)
-    {
-        boolean checked = ((CheckBox)view).isChecked();
-        if (view.getId() == R.id.checkBox1) {
-            if (checked) {
-                Log.i("already chosen lah", "already chosen lah");
-                return;
-            }
-            Log.i("radiobutton deselected", "radiobutton deselected");
-        }
-
-        if (view.getId() == R.id.checkBox2) {
-            if (checked) {
-                Log.i("already chosen lah", "already chosen lah");
-                return;
-            }
-            Log.i("radiobutton deselected", "radiobutton deselected");
-        }
-    }
-
-    /**
-     * Hides the soft keyboard
-     */
+     // Hides the soft keyboard
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         View view = getCurrentFocus();
@@ -187,21 +142,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            Log.i("navigation","home");
             // Handle the camera action
         } else if (id == R.id.nav_watchlist) {
-
+            Log.i("navigation","watchlist");
         } else if (id == R.id.nav_profile) {
-
+            Log.i("navigation","profile");
         } else if (id == R.id.nav_settings) {
-
+            Log.i("navigation","settings");
         } else if (id == R.id.nav_logout) {
-
+            Log.i("navigation","logout");
         }
-
-
-        //else if (id == R.id.nav_send) {
-
-        //}
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -291,3 +242,28 @@ public class MainActivity extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }*/
+
+
+//when checkbox is selected / deselected listener
+//refer to res>values>strings.xml to identify which checkbox belongs to which criteria
+    /*
+    public void selectButton(View view)
+    {
+        boolean checked = ((CheckBox)view).isChecked();
+        if (view.getId() == R.id.checkBox1) {
+            if (checked) {
+                Log.i("radiobutton selected", "radiobutton selected");
+                return;
+            }
+            Log.i("radiobutton deselected", "radiobutton deselected");
+        }
+
+        if (view.getId() == R.id.checkBox2) {
+            if (checked) {
+                Log.i("radiobutton selected", "radiobutton selected");
+                return;
+            }
+            Log.i("radiobutton deselected", "radiobutton deselected");
+        }
+    }
+*/

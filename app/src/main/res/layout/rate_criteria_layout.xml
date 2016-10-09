@@ -1,0 +1,99 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"
+        android:text="Which criterion is more important?"
+        android:background="@color/colorBrown"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/textViewTitle" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorSelectCriteriaBackground"
+            android:layout_below="@+id/textViewTitle"
+            android:weightSum="1">
+
+         <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/colorOrange"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:id="@+id/rateCriteriaLayout">
+
+             <LinearLayout
+                 android:orientation="horizontal"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:background="@color/colorSaddleBrown"
+                 android:paddingBottom="10dp"
+                 android:paddingLeft="10dp"
+                 android:paddingRight="10dp"
+                 android:paddingTop="10dp">
+
+                 <ImageView
+                     android:layout_width="60dp"
+                     android:layout_height="match_parent"
+                     android:src="@mipmap/tooltip"
+                     android:id="@+id/imageViewToolTip" />
+
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:gravity="center"
+                     android:textColor="@color/colorSelectCriteriaBackground"
+                     android:textAppearance="?android:attr/textAppearanceSmall"
+                     android:text="In order of 1-100, how each criteria is important to you in deciding for the accomodation"
+                     android:id="@+id/textViewRateCriteriaTip" />
+             </LinearLayout>
+
+         </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/rateCriteriaSliderLayout">
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/rate_criteria_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:backgroundTint="@color/colorOrange"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Submit"
+                    android:elevation="16dp"
+                    android:textColor="@android:color/white"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+</RelativeLayout>

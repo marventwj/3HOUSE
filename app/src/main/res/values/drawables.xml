@@ -5,5 +5,4 @@
     <item name="settings_icon" type="drawable">@drawable/ic_settings_black_24dp</item>
     <item name="logout_icon" type="drawable">@drawable/ic_power_settings_new_black_24dp</item>
 
-    <item name="ic_menu_send" type="drawable">@android:drawable/ic_menu_send</item>
 </resources>

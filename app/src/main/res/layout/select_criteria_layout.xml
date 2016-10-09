@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="500dp"
+    android:layout_height="match_parent"
     android:id="@+id/trythis">
 
     <TextView
@@ -13,13 +13,14 @@
         android:text="Select Criteria"
         android:background="@color/colorBrown"
         android:textColor="@color/colorWhite"
-        android:id="@+id/textView2" />
+        android:id="@+id/textViewSelectCriteria" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/verticalScrollView"
-        android:layout_below="@+id/textView2">
+        android:background="@color/colorSelectCriteriaBackground"
+        android:layout_below="@+id/textViewSelectCriteria">
 
         <LinearLayout
             android:orientation="vertical"
@@ -33,18 +34,28 @@
                 android:text="@string/checkBox1"
                 android:id="@+id/checkBox1"
                 android:button="@android:drawable/btn_star"
-                android:background="@color/colorLightGray"
-                android:onClick="selectButton"/>
+                android:background="@color/colorLightGray" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:paddingTop="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:gravity="center"
+                android:layout_height="30dp">
+
+                <View style="@style/Divider"/>
+            </LinearLayout>
 
             <CheckBox
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/checkBox2"
                 android:id="@+id/checkBox2"
-                android:layout_below="@+id/checkBox1"
+                android:layout_below="@+id/imageViewLine1"
                 android:button="@android:drawable/btn_star"
-                android:background="@color/colorLightGray"
-                android:onClick="selectButton"/>
+                android:background="@color/colorLightGray" />
 
             <CheckBox
                 android:layout_width="match_parent"
@@ -53,19 +64,28 @@
                 android:id="@+id/checkBox3"
                 android:layout_below="@+id/checkBox2"
                 android:button="@android:drawable/btn_star"
-                android:background="@color/colorLightGray"
+                android:background="@color/colorLightGray" />
 
-                android:onClick="selectButton"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:paddingTop="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:gravity="center"
+                android:layout_height="30dp">
+
+                <View style="@style/Divider"/>
+            </LinearLayout>
 
             <CheckBox
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/checkBox4"
                 android:id="@+id/checkBox4"
-                android:layout_below="@+id/checkBox3"
+                android:layout_below="@+id/imageViewLine2"
                 android:button="@android:drawable/btn_star"
-                android:background="@color/colorLightGray"
-                android:onClick="selectButton"/>
+                android:background="@color/colorLightGray" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -81,8 +101,7 @@
                     android:text="@string/checkBox5"
                     android:id="@+id/checkBox5"
                     android:layout_below="@+id/checkBox4"
-                    android:button="@android:drawable/btn_star"
-                    android:onClick="selectButton"/>
+                    android:button="@android:drawable/btn_star" />
 
                 <CheckBox
                     android:layout_width="match_parent"
@@ -90,8 +109,7 @@
                     android:text="@string/checkBox6"
                     android:id="@+id/checkBox6"
                     android:layout_below="@+id/checkBox5"
-                    android:button="@android:drawable/btn_star"
-                    android:onClick="selectButton"/>
+                    android:button="@android:drawable/btn_star" />
 
                 <CheckBox
                     android:layout_width="match_parent"
@@ -99,8 +117,7 @@
                     android:text="@string/checkBox7"
                     android:id="@+id/checkBox7"
                     android:layout_below="@+id/checkBox6"
-                    android:button="@android:drawable/btn_star"
-                    android:onClick="selectButton"/>
+                    android:button="@android:drawable/btn_star" />
 
                 <CheckBox
                     android:layout_width="match_parent"
@@ -108,8 +125,7 @@
                     android:text="@string/checkBox8"
                     android:id="@+id/checkBox8"
                     android:layout_below="@+id/checkBox7"
-                    android:button="@android:drawable/btn_star"
-                    android:onClick="selectButton"/>
+                    android:button="@android:drawable/btn_star" />
 
                 <CheckBox
                     android:layout_width="match_parent"
@@ -117,8 +133,7 @@
                     android:text="@string/checkBox9"
                     android:id="@+id/checkBox9"
                     android:layout_below="@+id/checkBox8"
-                    android:button="@android:drawable/btn_star"
-                    android:onClick="selectButton"/>
+                    android:button="@android:drawable/btn_star" />
 
                 <CheckBox
                     android:layout_width="match_parent"
@@ -126,8 +141,7 @@
                     android:text="@string/checkBox10"
                     android:id="@+id/checkBox10"
                     android:layout_below="@+id/checkBox9"
-                    android:button="@android:drawable/btn_star"
-                    android:onClick="selectButton"/>
+                    android:button="@android:drawable/btn_star" />
             </LinearLayout>
 
             <android.support.design.widget.FloatingActionButton
@@ -136,8 +150,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:backgroundTint="@color/colorOrange"
-                android:src="@android:drawable/ic_media_play" />
-
+                android:tint="@color/colorWhite"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
         </LinearLayout>
     </ScrollView>
 

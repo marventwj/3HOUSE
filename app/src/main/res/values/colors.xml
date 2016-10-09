@@ -9,4 +9,5 @@
     <color name="colorLightGray">#D3D3D3</color>
     <color name="colorSaddleBrown">#A55A00</color>
     <color name="colorDarkGray">#252C2E</color>
+    <color name="colorSelectCriteriaBackground">#F1F1F1</color>
 </resources>
