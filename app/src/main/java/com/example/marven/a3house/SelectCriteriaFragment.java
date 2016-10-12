@@ -16,11 +16,14 @@ import android.widget.CheckBox;
  */
 public class SelectCriteriaFragment extends Fragment implements View.OnClickListener {
 
-    public SelectCriteriaFragment(){}
+    public SelectCriteriaFragment() {
+    }
+
     View myView;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        myView = inflater.inflate(R.layout.select_criteria_layout,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        myView = inflater.inflate(R.layout.fragment_select_criteria, container, false);
 
         FloatingActionButton criteriaSubmit = (FloatingActionButton) myView.findViewById(R.id.criteria_submit);
         criteriaSubmit.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +57,7 @@ public class SelectCriteriaFragment extends Fragment implements View.OnClickList
     //when checkbox is selected / deselected listener
     //refer to res>values>strings.xml to identify which checkbox belongs to which criteria
     public void onClick(View view) {
-        boolean checked = ((CheckBox)view).isChecked();
+        boolean checked = ((CheckBox) view).isChecked();
         if (view.getId() == R.id.checkBox1) {
             if (checked) {
                 Log.i("log", "Nearby places radio button selected ");
