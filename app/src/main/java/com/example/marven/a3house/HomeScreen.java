@@ -27,7 +27,7 @@ public class HomeScreen extends BaseActivity
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         propertyDetailsLayout.setLayoutParams(layoutParams);
-
+//
         // If you want to add some controls in this Relative Layout
         layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
