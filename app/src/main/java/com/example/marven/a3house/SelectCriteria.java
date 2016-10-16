@@ -20,7 +20,7 @@ public class SelectCriteria extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.select_criteria_layout);
+        setContentView(R.layout.activity_select_criteria);
         super.onCreateDrawer();
 
         //new activity code starts here*****************************************************************************************

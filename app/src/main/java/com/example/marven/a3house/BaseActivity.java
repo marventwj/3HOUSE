@@ -1,6 +1,7 @@
 package com.example.marven.a3house;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -73,7 +74,7 @@ abstract public class BaseActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View hView = navigationView.getHeaderView(0);
         CircularImageView nav_user = (CircularImageView) hView.findViewById(R.id.imageViewCircular);
-        nav_user.setImageResource(R.mipmap.ic_launcher);   //replace this with user's profile picture
+       // nav_user.setImageResource(R.mipmap.ic_launcher);   //replace this with user's profile picture
 
         //new activity code starts here*****************************************************************************************
 
@@ -116,12 +117,17 @@ abstract public class BaseActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+            /*
             //test fragment transaction with navigation menu
-            SelectCriteriaFragment fragment = new SelectCriteriaFragment();
+            testFragment fragment = new testFragment();
             android.support.v4.app.FragmentTransaction fragmentTransaction =
                     getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.container, fragment);
             fragmentTransaction.commit();
+            */
+            Intent i = new Intent(getBaseContext(), HomeScreen.class);
+            startActivity(i);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             System.out.println("base activity's home launched");
         } else if (id == R.id.nav_watchlist) {
             System.out.println("base activity's watchlist launched");

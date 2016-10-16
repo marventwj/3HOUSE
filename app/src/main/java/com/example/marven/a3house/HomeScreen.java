@@ -1,21 +1,44 @@
 package com.example.marven.a3house;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Build;
+import android.os.Environment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.io.File;
+import java.util.ArrayList;
+
 public class HomeScreen extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    ArrayList<Property> propertyList, propertyRentList, propertySaleList;
+    ListView listView;
+    private static CustomAdapter adapter;
+    private boolean flagRent = false;
+    private boolean flagRentAndSale = false;
+    private boolean flagSale = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,60 +46,47 @@ public class HomeScreen extends BaseActivity
         super.onCreateDrawer();
 
         //new activity code starts here*****************************************************************************************
-        LinearLayout propertyListLayout = (LinearLayout) this.findViewById(R.id.propertyListLayout);
-        RelativeLayout propertyDetailsLayout = new RelativeLayout(this);
-        // Defining the RelativeLayout layout parameters.
-        // In this case I want to fill its parent
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        propertyDetailsLayout.setLayoutParams(layoutParams);
 
-        // If you want to add some controls in this Relative Layout
-        layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+        listView = (ListView) findViewById(R.id.list);
 
+        propertyList = new ArrayList<>();
 
-        //rent textview
-        TextView propertyStatus = new TextView(this);
-        propertyStatus.setText("RENT");
-        //System.out.println("text color : " +propertyStatus.getTextColors());
-        //propertyStatus.setTextColor(ContextCompat.getColor(this, R.color.colorWhite));
-       //propertyStatus.setTextColor(getResources().getColor(R.color.colorWhite));
-        propertyStatus.setBackgroundColor(getResources().getColor(R.color.colorGreen));
-        propertyStatus.setPadding(5,0,5,0);//left top right bottom
-        propertyStatus.setTextAppearance(this, android.R.style.TextAppearance_Small);
-        layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-        propertyStatus.setLayoutParams(layoutParams);
-        propertyDetailsLayout.addView(propertyStatus);
+        propertyList.add(new Property(true, "woodlands", "alex"));
+        propertyList.add(new Property(false, "admiralty", "bob"));
+        propertyList.add(new Property(true, "sembawang", "charles"));
+        propertyList.add(new Property(true, "yishun", "dedrick"));
+        propertyList.add(new Property(false, "hougang", "eric"));
+        propertyList.add(new Property(false, "orchard", "felicia"));
+        propertyList.add(new Property(true, "NTU", "glen"));
+        propertyList.add(new Property(true, "bedok", "hippo"));
+        propertyList.add(new Property(true, "changiAirport", "jack"));
+        propertyList.add(new Property(false, "bishan", "mitch"));
+        propertyList.add(new Property(true, "jurong east", "leon"));
+        propertyList.add(new Property(true, "boon lay", "trish"));
+        propertyList.add(new Property(false, "pioneer", "vinod"));
 
+        adapter = new CustomAdapter(propertyList, getApplicationContext());
+        listView.setAdapter(adapter);
 
-        layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        propertyRentList = new ArrayList<>();
+        propertySaleList = new ArrayList<>();
 
-        TextView textView = new TextView(this);
-        textView.setText("For:");
-        textView.setTextAppearance(this, android.R.style.TextAppearance_Small);
-        textView.setPadding(0,0,5,0);//left top right bottom
-        layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-        propertyStatus.setId(propertyStatus.getId()+2);
-        layoutParams.addRule(RelativeLayout.LEFT_OF, propertyStatus.getId());
-        textView.setLayoutParams(layoutParams);
-        propertyDetailsLayout.addView(textView);
+        for (int i=0; i<propertyList.size(); i++){
+            if(propertyList.get(i).getRentStatus())
+                propertyRentList.add(propertyList.get(i));
+            else
+                propertySaleList.add(propertyList.get(i));
+        }
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-//need change to circular image view and adjust positioning
-        layoutParams = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
-
-        CircularImageView propertyImage = new CircularImageView(this);
-        //propertyImage.setImageResource(R.mipmap.ic_launcher);
-        //propertyImage.setBackgroundResource(R.drawable.home_icon);
-        //propertyDetailsLayout.addView(propertyImage, layoutParams);
-
-
-        propertyListLayout.addView(propertyDetailsLayout);
+                Property property = propertyList.get(position);
+                Snackbar.make(view, "Property details: " + property.getDetails() + "\nOwner's name: " + property.getOwnerName(), Snackbar.LENGTH_LONG)
+                        .setAction("No action", null).show();
+            }
+        });
 
         //adjust seekbar to 3 states
         SeekBar seekBar = (SeekBar) findViewById(R.id.toggleBar);
@@ -85,16 +95,39 @@ public class HomeScreen extends BaseActivity
             @Override
             public void onProgressChanged(SeekBar seekBar,
                                           int progress, boolean arg2) {
-                System.out.println(progress);
-                if (progress < 23) {
+                //System.out.println(progress);
+                if (progress < 23) {                            //status set to rent
                     seekBar.setProgress(22);
-                    System.out.println("for rent");
-                } else if (progress >= 23 && progress <= 77) {
+                    if (flagRent == false) {
+                        flagRent = true;
+                        flagRentAndSale = false;
+                        flagSale = false;
+                        System.out.println("for rent");
+                        adapter = new CustomAdapter(propertyRentList, getApplicationContext());
+                        listView.setAdapter(adapter);
+                    }
+
+                } else if (progress >= 23 && progress <= 77) {  //status set to rent and sale
                     seekBar.setProgress(50);
-                    System.out.println("for rent and sale");
+                    if (flagRentAndSale == false) {
+                        flagRent = false;
+                        flagRentAndSale = true;
+                        flagSale = false;
+                        System.out.println("for rent and sale");
+                        adapter = new CustomAdapter(propertyList, getApplicationContext());
+                        listView.setAdapter(adapter);
+                    }
+
                 } else {
-                    seekBar.setProgress(78);
-                    System.out.println("for sale");
+                    seekBar.setProgress(78);                    //status set to sale
+                    if (!flagSale) {
+                        flagRent = false;
+                        flagRentAndSale = false;
+                        flagSale = true;
+                        System.out.println("for sale");
+                        adapter = new CustomAdapter(propertySaleList, getApplicationContext());
+                        listView.setAdapter(adapter);
+                    }
                 }
             }
 
@@ -107,15 +140,46 @@ public class HomeScreen extends BaseActivity
             }
         });
 
+        FloatingActionButton toSelectCriteria = (FloatingActionButton) this.findViewById(R.id.to_select_criteria);
+        toSelectCriteria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // ArrayList<String> myStrings = new ArrayList<String>();
+                Intent i = new Intent(getBaseContext(), SelectCriteria.class);
+                // i.putStringArrayListExtra("strings", myStrings);
+                startActivity(i);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+               /*
+        ImageView divider = new ImageView(this);
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 5);
+        propertyImage.setId(propertyImage.getId()+4);
+        lp.addRule(RelativeLayout.BELOW, propertyImage.getId());
+        lp.setMargins(10, 10, 10, 10);
+        divider.setLayoutParams(lp);
+        divider.setBackgroundColor(Color.RED);
+        propertyDetailsLayout.addView(divider);
+*/
     }
 
-    public static int getColorWrapper(Context context, int id) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return context.getColor(id);
-        } else {
-            //noinspection deprecation
-            return context.getResources().getColor(id);
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        View view = getCurrentFocus();
+        FloatingActionButton toSelectCriteria = (FloatingActionButton) this.findViewById(R.id.to_select_criteria);
+        if (view != null && (ev.getAction() == MotionEvent.ACTION_UP || ev.getAction() == MotionEvent.ACTION_MOVE) && view instanceof EditText && !view.getClass().getName().startsWith("android.webkit.")) {
+            int scrcoords[] = new int[2];
+            view.getLocationOnScreen(scrcoords);
+            toSelectCriteria.hide();
+            float x = ev.getRawX() + view.getLeft() - scrcoords[0];
+            float y = ev.getRawY() + view.getTop() - scrcoords[1];
+            if (x < view.getLeft() || x > view.getRight() || y < view.getTop() || y > view.getBottom()){
+                ((InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow((this.getWindow().getDecorView().getApplicationWindowToken()), 0);
+                toSelectCriteria.show();
+            }
         }
+        return super.dispatchTouchEvent(ev);
     }
 
 }

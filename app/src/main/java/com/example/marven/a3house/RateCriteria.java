@@ -10,7 +10,6 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 //import android.support.v7.widget.SearchView;
 import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -28,7 +27,7 @@ public class RateCriteria extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.rate_criteria_layout);
+        setContentView(R.layout.activity_rate_criteria);
         super.onCreateDrawer();
 
 

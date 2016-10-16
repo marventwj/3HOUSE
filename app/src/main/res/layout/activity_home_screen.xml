@@ -81,137 +81,121 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <ScrollView
-                    android:id="@+id/verticalScrollView"
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/textViewSelectCriteria"
-                    android:background="@color/colorSelectCriteriaBackground">
+                    android:layout_height="40dp"
+                    android:background="@color/colorLightGray"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="5dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <ImageButton
+                        android:id="@+id/imageMapToggle"
+                        android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@color/colorLightGray"
-                            android:orientation="horizontal"
-                            android:paddingBottom="5dp"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            android:paddingTop="5dp">
-
-                            <ImageButton
-                                android:id="@+id/imageMapToggle"
-                                android:layout_width="70dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="left"
-                                android:layout_centerVertical="true"
-                                android:background="@drawable/round_corner"
-                                android:src="@drawable/ic_map_black_24dp"
-                                android:tint="@color/colorOrange" />
-
-                            <TextView
-                                android:id="@+id/textViewFor"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:layout_toLeftOf="@+id/textViewRent"
-                                android:paddingRight="5dp"
-                                android:text="For:"
-                                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                            <TextView
-                                android:id="@+id/textViewRent"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:layout_toLeftOf="@+id/toggleBar"
-                                android:background="@color/colorGreen"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:text="RENT"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:textColor="@color/colorWhite" />
-
-                            <SeekBar
-                                android:id="@+id/toggleBar"
-                                android:layout_width="50dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginBottom="5dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_toLeftOf="@+id/textViewSale"
-                                android:max="100"
-                                android:maxHeight="50dp"
-                                android:minHeight="10dp"
-                                android:paddingEnd="2dp"
-                                android:paddingStart="2dp"
-                                android:progressDrawable="@drawable/progress"
-                                android:splitTrack="false"
-                                android:thumb="@drawable/toggle_thumb" />
-
-                            <TextView
-                                android:id="@+id/textViewSale"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center"
-                                android:background="@color/colorRed"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:text="SALE"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:textColor="@color/colorWhite" />
-
-                        </RelativeLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:gravity="center"
-                            android:id="@+id/propertyListLayout"
-                            android:orientation="vertical">
-<!--
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                            </RelativeLayout>
--->
-                            <View style="@style/Divider" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </ScrollView>
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <android.support.design.widget.FloatingActionButton
-                        android:id="@+id/rate_criteria_submit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        app:backgroundTint="@color/colorOrange" />
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:background="@drawable/round_corner"
+                        android:src="@drawable/ic_map_black_24dp"
+                        android:tint="@color/colorOrange" />
 
                     <TextView
+                        android:id="@+id/textViewFor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_gravity="center"
-                        android:elevation="16dp"
-                        android:text="Submit"
+                        android:layout_toLeftOf="@+id/textViewRent"
+                        android:paddingRight="5dp"
+                        android:text="For:"
                         android:textAppearance="?android:attr/textAppearanceSmall"
-                        android:textColor="@android:color/white" />
-                </FrameLayout>
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewRent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_toLeftOf="@+id/toggleBar"
+                        android:background="@color/colorGreen"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="RENT"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/colorWhite" />
+
+                    <SeekBar
+                        android:id="@+id/toggleBar"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toLeftOf="@+id/textViewSale"
+                        android:max="100"
+                        android:maxHeight="50dp"
+                        android:minHeight="10dp"
+                        android:paddingEnd="2dp"
+                        android:paddingStart="2dp"
+                        android:progressDrawable="@drawable/progress"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/toggle_thumb" />
+
+                    <TextView
+                        android:id="@+id/textViewSale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@color/colorRed"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="SALE"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/colorWhite" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/propertyListLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ListView
+                        android:id="@+id/list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
             </LinearLayout>
+
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:paddingBottom="10dp">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/to_select_criteria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="center"
+                android:src="@mipmap/ic_launcher"
+                app:backgroundTint="@color/colorOrange" />
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

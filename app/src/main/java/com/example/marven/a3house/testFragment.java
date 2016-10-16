@@ -1,6 +1,5 @@
 package com.example.marven.a3house;
 
-import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -14,16 +13,16 @@ import android.widget.CheckBox;
 /**
  * Created by Marven on 29-09-16.
  */
-public class SelectCriteriaFragment extends Fragment implements View.OnClickListener {
+public class testFragment extends Fragment implements View.OnClickListener {
 
-    public SelectCriteriaFragment() {
+    public testFragment() {
     }
 
     View myView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.fragment_select_criteria, container, false);
+        myView = inflater.inflate(R.layout.fragment_test, container, false);
 
         FloatingActionButton criteriaSubmit = (FloatingActionButton) myView.findViewById(R.id.criteria_submit);
         criteriaSubmit.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +40,7 @@ public class SelectCriteriaFragment extends Fragment implements View.OnClickList
                 fragmentTransaction.commit();
 */
                 //FragmentManager fragmentManager = getFragmentManager();
-                //fragmentManager.beginTransaction().replace(R.id.trythis, new SelectCriteriaFragment()).commit();
+                //fragmentManager.beginTransaction().replace(R.id.trythis, new testFragment()).commit();
             }
         });
 
