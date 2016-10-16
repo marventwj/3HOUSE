@@ -11,5 +11,6 @@
     <color name="colorDarkGray">#252C2E</color>
     <color name="colorRed">#C00000</color>
     <color name="colorGreen">#008000</color>
+    <color name="colorMapToggle">#A87843</color>
     <color name="colorSelectCriteriaBackground">#F1F1F1</color>
 </resources>

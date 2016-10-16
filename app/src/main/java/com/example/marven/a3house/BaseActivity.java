@@ -78,9 +78,6 @@ abstract public class BaseActivity extends AppCompatActivity
 
         //new activity code starts here*****************************************************************************************
 
-        //this listens to button clicks;
-        //  addListenerOnButton();
-
         //  searchView.setIconified(false);
         //  searchView.setQueryHint("Enter housing estate");
         //  searchView.setIconifiedByDefault(false);

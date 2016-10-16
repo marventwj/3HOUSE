@@ -92,7 +92,7 @@ public class RateCriteria extends BaseActivity
         rateCriteriaSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), SelectCriteria.class);
+                Intent i = new Intent(getBaseContext(), Recommendations.class);
                 startActivity(i);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
