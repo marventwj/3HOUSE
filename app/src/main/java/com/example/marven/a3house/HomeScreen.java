@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -18,10 +19,20 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
 
 public class HomeScreen extends BaseActivity
-        implements SeekBar.OnSeekBarChangeListener, View.OnClickListener, PropertyListFragment.OnNewsItemSelectedListener {
+        implements SeekBar.OnSeekBarChangeListener, View.OnClickListener, PropertyListFragment.OnNewsItemSelectedListener, OnMapReadyCallback {
 
     private ArrayList<Property> propertyList = new ArrayList<>(), propertyRentList, propertySaleList, propertyListPassInFragment;
     ListView listView;
@@ -32,6 +43,8 @@ public class HomeScreen extends BaseActivity
     private ImageView image;
     private boolean flag = true;
 
+    SupportMapFragment sMapFragment;
+
     PropertyListFragment propertyListFragment = new PropertyListFragment();
     PropertyListFragment propertyRentListFragment = new PropertyListFragment();
     PropertyListFragment propertySaleListFragment = new PropertyListFragment();
@@ -40,6 +53,10 @@ public class HomeScreen extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sMapFragment = SupportMapFragment.newInstance();
+        sMapFragment.getMapAsync(this);
+
         setContentView(R.layout.activity_home_screen);
         super.onCreateDrawer();
         //new activity code starts here*****************************************************************************************
@@ -116,9 +133,9 @@ public class HomeScreen extends BaseActivity
     //Override the method here
     @Override
     public void onNewsItemPicked(int position) {
-        //Do something with the position value passed back
+        //Do something with the position value passed back, (intent to respective property page)
         Toast.makeText(this, "Clicked " + position, Toast.LENGTH_LONG).show();
-        System.out.println("activity");
+        System.out.println("home screen activity");
     }
 
 
@@ -144,7 +161,6 @@ public class HomeScreen extends BaseActivity
                     fragmentTransaction.hide(propertySaleListFragment);
                     fragmentTransaction.commit();
                 }
-
             }
 
         } else if (progress >= 23 && progress <= 77) {  //status set to rent and sale
@@ -188,7 +204,6 @@ public class HomeScreen extends BaseActivity
         }
     }
 
-
     public void onStartTrackingTouch(SeekBar seekBar) {
         // TODO Auto-generated method stub
     }
@@ -197,32 +212,19 @@ public class HomeScreen extends BaseActivity
         // TODO Auto-generated method stub
     }
 
-    /*
-    protected void displayFragmentA() {
-    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-    if (fragmentA.isAdded()) { // if the fragment is already in container
-        ft.show(fragmentA);
-    } else { // fragment needs to be added to frame container
-        ft.add(R.id.flContainer, fragmentA, "A");
-    }
-    // Hide fragment B
-    if (fragmentB.isAdded()) { ft.hide(fragmentB); }
-    // Hide fragment C
-    if (fragmentC.isAdded()) { ft.hide(fragmentC); }
-    // Commit changes
-    ft.commit();
-}
-     */
-
     public void onClick(View arg0) {
 
         Drawable background;
         if (flag) {
             System.out.println("map view");
             background = getResources().getDrawable(R.drawable.round_corner_orange);
-
-            // if (fragment.isAdded())
             android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+            if (sMapFragment.isAdded())
+                fragmentTransaction.show(sMapFragment);
+            else
+                fragmentTransaction.add(R.id.propertyListLayout, sMapFragment);
+
             fragmentTransaction.hide(propertyListFragment);
             fragmentTransaction.hide(propertyRentListFragment);
             fragmentTransaction.hide(propertySaleListFragment);
@@ -238,15 +240,7 @@ public class HomeScreen extends BaseActivity
                 fragmentTransaction.show(propertyRentListFragment);
             if (flagSale)
                 fragmentTransaction.show(propertySaleListFragment);
-            //else {
-            //  fragmentTransaction.replace(R.id.propertyListLayout, fragment);
-            //  fragmentTransaction.show(fragment);
-            //  System.out.println("replaced");
-            // Hide fragment B
-            //if (fragmentB.isAdded()) { ft.hide(fragmentB); }
-            // Hide fragment C
-            //if (fragmentC.isAdded()) { ft.hide(fragmentC); }
-            //}
+            fragmentTransaction.hide(sMapFragment);
             fragmentTransaction.commit();
         }
         image.setBackgroundDrawable(background);
@@ -258,21 +252,59 @@ public class HomeScreen extends BaseActivity
     }
 
     public void setPropertyList(ArrayList<Property> propertyList) {
-        propertyList.add(new Property(true, "woodlands", "alex"));
-        propertyList.add(new Property(false, "admiralty", "bob"));
-        propertyList.add(new Property(true, "sembawang", "charles"));
-        propertyList.add(new Property(true, "yishun", "dedrick"));
-        propertyList.add(new Property(false, "hougang", "eric"));
-        propertyList.add(new Property(false, "orchard", "felicia"));
-        propertyList.add(new Property(true, "NTU", "glen"));
-        propertyList.add(new Property(true, "bedok", "hippo"));
-        propertyList.add(new Property(true, "changiAirport", "jack"));
-        propertyList.add(new Property(false, "bishan", "mitch"));
-        propertyList.add(new Property(true, "jurong east", "leon"));
-        propertyList.add(new Property(true, "boon lay", "trish"));
-        propertyList.add(new Property(false, "pioneer", "vinod"));
+        propertyList.add(new Property(true, "woodlands", "woodlands details", "alex", 1.436740, 103.786525));
+        propertyList.add(new Property(false, "admiralty", "admiralty details", "bob", 1.440604, 103.801331));
+        propertyList.add(new Property(true, "sembawang", "sembawang details", "charles", 1.448820, 103.819946));
+        propertyList.add(new Property(true, "yishun", "yishun details", "dedrick", 1.428974, 103.834882));
+        propertyList.add(new Property(false, "hougang", "hougang details", "eric", 1.359406, 103.885631));
+        propertyList.add(new Property(false, "orchard", "orchard details", "felicia", 1.301445, 103.838469));
+        propertyList.add(new Property(true, "NTU", "NTU details", "glen", 1.348592, 103.683343));
+        propertyList.add(new Property(true, "bedok", "bedok details", "hippo", 1.323363, 103.929693));
+        propertyList.add(new Property(true, "changiAirport", "changiAirport details", "jack", 1.364302, 103.991545));
+        propertyList.add(new Property(false, "bishan", "bishan details", "mitch", 1.350340, 103.847350));
+        propertyList.add(new Property(true, "jurong east", "jurong east details", "leon", 1.332162, 103.744715));
+        propertyList.add(new Property(true, "boon lay", "boon lay details", "trish", 1.338540, 103.705911));
+        propertyList.add(new Property(false, "pioneer", "pioneer details", "vinod", 1.337554, 103.697231));
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        //singapore lat 1.29, lng 103.851
+        LatLng singapore = new LatLng(1.29, 103.851);                            //LatLng of location
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(singapore, 14)); //how much to zoom, 14
+        googleMap.addMarker(new MarkerOptions()
+                .title("Singapore")
+                .snippet("This is Singapore!")
+                .position(singapore));
+
+        String title;
+        String details;
+        double lat;
+        double lng;
+        for (int i = 0; i < propertyList.size(); i++) {
+            title = propertyList.get(i).getTitle();
+            details = propertyList.get(i).getDetails();
+            lat = propertyList.get(i).getLat();
+            lng = propertyList.get(i).getLng();
+            googleMap.addMarker(new MarkerOptions()
+                    .title(title)
+                    .snippet( "the text can be around this long before it get dotted")
+                    .position(new LatLng(lat, lng)));
+        }
+
+        //googleMap.clear();        //clear all the markers
+
+        //        Marker marker =
+        //                marker.remove();  //to remove individual markers
+        /*
+        // You can customize the marker image using images bundled with
+        // your app, or dynamically generated bitmaps.
+        map.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.house_flag))
+                .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
+                .position(new LatLng(41.889, -87.622)));
+         */
+    }
 }
 
 

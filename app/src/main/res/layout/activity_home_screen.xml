@@ -196,7 +196,6 @@
                 app:backgroundTint="@color/colorOrange" />
 
         </RelativeLayout>
-
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

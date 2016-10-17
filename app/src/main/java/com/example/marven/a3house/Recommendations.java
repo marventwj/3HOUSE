@@ -1,6 +1,5 @@
 package com.example.marven.a3house;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -19,7 +18,6 @@ public class Recommendations extends HomeScreen{
         setContentView(R.layout.activity_recommendations);
         super.onCreateDrawer();
 
-        //adjust seekbar to 3 states
         SeekBar seekBar = (SeekBar) findViewById(R.id.toggleBar);
         seekBar.setProgress(50);
         seekBar.setOnSeekBarChangeListener(this);
@@ -27,18 +25,21 @@ public class Recommendations extends HomeScreen{
         image = (ImageView) findViewById(R.id.imageMapToggle);
         image.setOnClickListener(this);
         //new activity code starts here*****************************************************************************************
+
+        //propertyList.add(new Property(true, "woodlands", "woodlands", "alex", 1.436740, 103.786525));
+        //propertyList.add(new Property(false, "admiralty", "admiralty", "bob", 1.440604, 103.801331));
+        //propertyList.add(new Property(true, "sembawang", "sembawang", "charles", 1.448820, 103.819946));
+        //propertyList.add(new Property(true, "yishun", "yishun", "dedrick", 1.428974, 103.834882));
     }
 
     @Override
     public void setPropertyList(ArrayList<Property> propertyList) {
         //put the recommended property arraylist here
-        propertyList.add(new Property(true, "woodlands", "alex"));
-        propertyList.add(new Property(false, "admiralty", "bob"));
-        propertyList.add(new Property(true, "sembawang", "charles"));
-        propertyList.add(new Property(true, "yishun", "dedrick"));
-        //propertyList.add(new Property(false, "hougang", "eric"));
-        //propertyList.add(new Property(false, "orchard", "felicia"));
-        //propertyList.add(new Property(true, "NTU", "glen"));
+        propertyList.add(new Property(true, "woodlands", "woodlands", "alex", 1.436740, 103.786525));
+        propertyList.add(new Property(false, "admiralty", "admiralty", "bob", 1.440604, 103.801331));
+        propertyList.add(new Property(true, "sembawang", "sembawang", "charles", 1.448820, 103.819946));
+        propertyList.add(new Property(true, "yishun", "yishun", "dedrick", 1.428974, 103.834882));
+        //this.propertyList = propertyList;
     }
 
     @Override
