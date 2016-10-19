@@ -4,7 +4,7 @@
 
     <uses-feature
         android:glEsVersion="0x00020000"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -18,6 +18,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -38,14 +39,16 @@
 
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBphLIlLyusbjGknuj3HMdUVkHFutGY56A" />
 
         <activity android:name=".RateCriteria" />
         <activity android:name=".SelectCriteria" />
-        <activity android:name=".Recommendations"></activity>
+        <activity android:name=".Recommendations" />
+        <activity android:name=".WatchList" />
+        <activity android:name=".SendMessage"></activity>
     </application>
 
 </manifest>

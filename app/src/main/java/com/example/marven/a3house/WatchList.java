@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class Recommendations extends HomeScreen {
+public class WatchList extends HomeScreen {
 
     private ArrayList<Property> propertyList = new ArrayList<>(), propertyRentList = new ArrayList<>(), propertySaleList = new ArrayList<>();
     ImageView image;
@@ -32,7 +32,7 @@ public class Recommendations extends HomeScreen {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recommendations);
+        setContentView(R.layout.activity_watch_list);
         super.onCreateDrawer();
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.toggleBar);
@@ -45,8 +45,6 @@ public class Recommendations extends HomeScreen {
 
         propertyList.add(new Property(true, "woodlands", "woodlands", "alex", 1.436740, 103.786525));
         propertyList.add(new Property(false, "admiralty", "admiralty", "bob", 1.440604, 103.801331));
-        propertyList.add(new Property(true, "sembawang", "sembawang", "charles", 1.448820, 103.819946));
-        propertyList.add(new Property(true, "yishun", "yishun", "dedrick", 1.428974, 103.834882));
 
         if (propertyList != null) {
             for (int i = 0; i < propertyList.size(); i++) {

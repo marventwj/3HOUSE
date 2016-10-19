@@ -33,54 +33,32 @@
                 android:orientation="vertical"
                 android:weightSum="1">
 
-                <TextView
-                    android:id="@+id/textViewSelectCriteria"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:background="@color/colorBrown"
-                    android:gravity="center"
-                    android:text="Welcome to 3HOUSE!"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/colorWhite" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/colorBrown">
 
-                <LinearLayout
-                    android:id="@+id/rateCriteriaLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:background="@color/colorOrange"
-                    android:orientation="vertical"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp">
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_toLeftOf="@+id/textViewWatchList"
+                        android:src="@drawable/watchlist_icon"
+                        android:tint="@color/colorWhite" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorSaddleBrown"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp"
+                    <TextView
+                        android:id="@+id/textViewWatchList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="54dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
                         android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp">
-
-                        <ImageView
-                            android:id="@+id/imageViewToolTip"
-                            android:layout_width="60dp"
-                            android:layout_height="match_parent"
-                            android:src="@mipmap/tooltip" />
-
-                        <TextView
-                            android:id="@+id/textViewInstructions"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="Guides / Instructions for first time users"
-                            android:textAppearance="?android:attr/textAppearanceSmall"
-                            android:textColor="@color/colorSelectCriteriaBackground" />
-                    </LinearLayout>
-                </LinearLayout>
-
+                        android:text="Watch List"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="@color/colorWhite" />
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -175,7 +153,9 @@
                         android:layout_height="wrap_content" />
 
                 </RelativeLayout>
+
             </LinearLayout>
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -196,6 +176,7 @@
                 app:backgroundTint="@color/colorOrange" />
 
         </RelativeLayout>
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

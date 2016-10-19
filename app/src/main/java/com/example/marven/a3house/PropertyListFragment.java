@@ -41,10 +41,17 @@ public class PropertyListFragment extends ListFragment implements AdapterView.On
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         HomeScreen activity = (HomeScreen) getActivity();
+        System.out.println("debug my fragmentsssssssssssssssss");
         propertyList = activity.getPropertyList();    //get property list from HomeScreen activity class
         CustomAdapter adapter = new CustomAdapter(propertyList, getActivity());
-        if (propertyList != null)
+
+        if (propertyList != null) {
             setListAdapter(adapter);
+          //  System.out.println(propertyList.get(0).getDetails() + " adapter is setted");
+          //  System.out.println(propertyList.get(1).getDetails() + " adapter is setted");
+        }
+        else
+        System.out.println("its null!!! whyyyy");
 
         getListView().setOnItemClickListener(this);
     }

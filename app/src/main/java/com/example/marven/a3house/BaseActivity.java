@@ -127,6 +127,9 @@ abstract public class BaseActivity extends AppCompatActivity
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             System.out.println("base activity's home launched");
         } else if (id == R.id.nav_watchlist) {
+            Intent i = new Intent(getBaseContext(), WatchList.class);
+            startActivity(i);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             System.out.println("base activity's watchlist launched");
         } else if (id == R.id.nav_profile) {
             System.out.println("base activity's profile launched");
