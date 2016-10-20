@@ -33,58 +33,73 @@
                 android:orientation="vertical"
                 android:weightSum="1">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:background = "@color/colorRed">
+                    android:background="@color/colorRed"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
+                        android:layout_toLeftOf="@+id/imageButton"
+                        android:background="@color/colorRed"
                         android:gravity="center"
-                        android:paddingLeft="10dp"
-                        android:layout_weight="1"
-                        android:text="test this very very long sentence"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textColor="@color/colorWhite" />
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:maxLength="30"
+                            android:text="this is default title"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textColor="@color/colorWhite" />
+                    </RelativeLayout>
 
                     <ImageButton
                         android:id="@+id/imageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_gravity="center"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@color/colorRed"
+                        android:gravity="center"
+                        android:onClick="addToWatchList"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:src="@drawable/watchlist_icon"
                         android:tint="@color/colorWhite" />
-                </LinearLayout>
+                </RelativeLayout>
 
                 <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:background="@color/colorOrange"
-                        android:orientation="horizontal"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:paddingTop="5dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/colorOrange"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="5dp">
 
-                        <TextView
-                            android:id="@+id/textView1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="54dp"
-                            android:layout_centerInParent="true"
-                            android:gravity="center"
-                            android:paddingLeft="10dp"
-                            android:text="SEND MESSAGE"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/colorWhite" />
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="54dp"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:text="SEND MESSAGE"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/colorWhite" />
 
-                    </RelativeLayout>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -107,7 +122,7 @@
                         android:layout_margin="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword"
+                        android:inputType="text"
                         android:ems="10"
                         android:id="@+id/passwordField"
                         android:layout_below="@+id/emailField"
@@ -115,30 +130,36 @@
                         android:hint="Message" />
 
                 </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="5dp">
+
+                    <ImageButton
+                        android:id="@+id/imageButton1"
+                        android:layout_width="140dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/round_corner_orange"
+                        android:onClick="sendMessage"
+                        android:tint="@color/colorOrange" />
+
+                    <TextView
+                        android:id="@+id/hoho1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Send Message"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold" />
+                </RelativeLayout>
             </LinearLayout>
-
-
         </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:paddingBottom="10dp">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/to_select_criteria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:scaleType="center"
-                android:src="@mipmap/ic_launcher"
-                app:backgroundTint="@color/colorOrange" />
-
-        </RelativeLayout>
-
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

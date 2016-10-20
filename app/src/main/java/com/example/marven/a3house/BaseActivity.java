@@ -1,7 +1,13 @@
 package com.example.marven.a3house;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -17,7 +23,21 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 abstract public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -27,13 +47,26 @@ abstract public class BaseActivity extends AppCompatActivity
     protected SearchView searchView;
     protected DrawerLayout drawer;
 
-    // Button button;
+
+    // make protected
+    protected FirebaseAuth mAuth;
+    protected FirebaseAuth.AuthStateListener mAuthListener;
+    protected DatabaseReference mDatabaseUsers;
+    private String userEmail;
+    private TextView mUserName; // for navigation bar
+    private String userMobile;
+    private String userDOB;
+    private String imageFileName;
+    private String userAddress;
+    private TextView mEditProfile;
+    private ProgressDialog mProgress;
+    protected CircleImageView mDisplay;
+    private int id;
+    private int currentId;
+    private int itemId;
+
     //@Override
     protected void onCreateDrawer() {
-
-        //super.onCreate(savedInstanceState);
-        //setContentView(R.layout.base_layout);
-
         //keyboard will not show up on activity start
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -112,6 +145,7 @@ abstract public class BaseActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent;
 
         if (id == R.id.nav_home) {
             /*
@@ -133,9 +167,36 @@ abstract public class BaseActivity extends AppCompatActivity
             System.out.println("base activity's watchlist launched");
         } else if (id == R.id.nav_profile) {
             System.out.println("base activity's profile launched");
+            /*
+            //intent = new Intent(getApplicationContext(), Profile.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            // Send User Name
+            intent.putExtra("userName", mUserName.getText().toString().trim());
+            // Send User Email
+            intent.putExtra("userEmail", userEmail);
+            // Send Display
+            Bitmap bitmap = ((BitmapDrawable)mDisplay.getDrawable()).getBitmap();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] b = baos.toByteArray();
+            intent.putExtra("userDisplay", b);
+            // Send User Mobile
+            intent.putExtra("userMobile", userMobile);
+            // Send User DOB
+            intent.putExtra("userDOB", userDOB);
+            // Send User imageName
+            intent.putExtra("imageName", imageFileName);
+            // Send User Address
+            intent.putExtra("userAddress", userAddress);
+
+            startActivity(intent);*/
         } else if (id == R.id.nav_settings) {
             System.out.println("base activity's settings launched");
         } else if (id == R.id.nav_logout) {
+            //mAuth.signOut();
+            //finish();
+            //startActivity(new Intent(getApplicationContext(), Login.class));
             System.out.println("base activity's logout launched");
         }
 
@@ -144,18 +205,3 @@ abstract public class BaseActivity extends AppCompatActivity
         return true;
     }
 }
-//to listen buttons
-/*
-    public void addListenerOnButton() {
-
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                onSearchRequested();
-                //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                //drawer.openDrawer(GravityCompat.START);
-            }
-        });
-    }
-*/

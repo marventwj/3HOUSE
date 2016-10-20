@@ -2,6 +2,7 @@ package com.example.marven.a3house;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -67,6 +68,13 @@ public class PropertyListFragment extends ListFragment implements AdapterView.On
         Property property = propertyList.get(position);
         Snackbar.make(view, "Property details: " + property.getDetails() + "\nOwner's name: " + property.getOwnerName(), Snackbar.LENGTH_LONG)
                 .setAction("No action", null).show();
+
+
+        Intent i = new Intent(getActivity(), PropertyScreen.class);
+        i.putExtra("properties", property);
+        startActivity(i);
+        getActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
 
         try {
             ((OnNewsItemSelectedListener) activity).onNewsItemPicked(position);

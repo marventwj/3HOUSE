@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <include
+            android:id="@+id/thetoolbar"
+            layout="@layout/app_bar_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/thetoolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/textViewTitle"
+                android:background="@color/colorSelectCriteriaBackground"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorRed"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_toLeftOf="@+id/imageButton"
+                        android:background="@color/colorRed"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:maxLength="30"
+                            android:text="this is default title"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textColor="@color/colorWhite" />
+                    </RelativeLayout>
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@color/colorRed"
+                        android:gravity="center"
+                        android:onClick="addToWatchList"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/watchlist_icon"
+                        android:tint="@color/colorWhite" />
+                </RelativeLayout>
+
+                <ScrollView
+                    android:id="@+id/verticalScrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorSelectCriteriaBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp">
+
+                        <android.support.v4.view.ViewPager
+                            android:id="@+id/view_pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="140dp"></android.support.v4.view.ViewPager>
+
+                        <Button
+                            android:id="@+id/expandableButton1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorLightGray"
+                            android:drawableRight="@android:drawable/arrow_down_float"
+                            android:onClick="expandableButton1"
+                            android:paddingRight="10dp"
+                            android:text="DETAILS" />
+
+                        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                            android:id="@+id/expandableLayout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/expandableButton1"
+                            app:ael_duration="400"
+                            app:ael_expanded="false"
+                            app:ael_interpolator="bounce"
+                            app:ael_orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:text="Unit: "
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/textView1"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:text="Price: "
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/textView2"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:text="Nearby Facilities: "
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/textView3"
+                                android:paddingLeft="10dp"
+                                android:paddingTop="10dp"
+                                android:text="Comments: "
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textStyle="bold" />
+                        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+                        <Button
+                            android:id="@+id/expandableButton2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/expandableLayout1"
+                            android:background="@color/colorLightGray"
+                            android:drawableRight="@android:drawable/arrow_down_float"
+                            android:onClick="expandableButton2"
+                            android:paddingRight="10dp"
+                            android:text="Contact" />
+
+                        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                            android:id="@+id/expandableLayout2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/expandableButton2"
+                            android:paddingBottom="1dp"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:paddingTop="1dp"
+                            app:ael_duration="400"
+                            app:ael_expanded="false"
+                            app:ael_interpolator="bounce"
+                            app:ael_orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/hoho"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/imageViewCircular"
+                                android:paddingLeft="20dp"
+                                android:text="User Name" />
+
+                            <com.example.marven.a3house.CircularImageView
+                                android:id="@+id/imageViewCircular"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_centerVertical="true"
+                                android:src="@android:drawable/sym_def_app_icon" />
+
+                            <RelativeLayout
+                                android:layout_width="140dp"
+                                android:layout_height="30dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:gravity="center">
+
+                                <ImageButton
+                                    android:id="@+id/imageButton1"
+                                    android:layout_width="140dp"
+                                    android:layout_height="30dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:background="@drawable/round_corner_orange"
+                                    android:onClick="sendMessage"
+                                    android:tint="@color/colorOrange" />
+
+                                <TextView
+                                    android:id="@+id/hoho1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:paddingLeft="20dp"
+                                    android:text="Send Message"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:textColor="@color/colorWhite"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+
+                        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/colorDarkGray"
+        app:headerLayout="@layout/nav_header_main"
+        app:itemIconTint="#FFFFFF"
+        app:itemTextColor="@color/colorWhite"
+        app:menu="@menu/activity_main_drawer" />
+
+
+</android.support.v4.widget.DrawerLayout>

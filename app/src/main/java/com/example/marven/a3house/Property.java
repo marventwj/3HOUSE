@@ -1,9 +1,11 @@
 package com.example.marven.a3house;
 
+import java.io.Serializable;
+
 /**
  * Created by Marven on 15-10-16.
  */
-public class Property {
+public class Property implements Serializable{
     boolean forRent;    //status true = for rent , status false = for sale, or can use ENUM
     String title;
     String details;     //details of the property (or can create an object called property details with get string methods (e.g title,unit,price,nearby facilities,comments)
